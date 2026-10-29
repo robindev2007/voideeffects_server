@@ -1,0 +1,20 @@
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  name          String
+  password      String?
+  role          Role           @default(USER)
+  avatar        String?
+  bio           String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  conversations Conversation[]
+  messages      Message[]
+
+  @@index([email])
+}
